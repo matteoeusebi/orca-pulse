@@ -44,11 +44,12 @@ header h1 { margin: 0; color: var(--orca-foreground); font-size: 13px; font-weig
 .resources .count { margin-left: auto; }
 .step.here { font-weight: 500; }
 .runs { padding-bottom: 4px; }
+.task .name { flex: 1 0 50%; }
 .run .name, .task .name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .task { padding-left: 26px; align-items: center; color: var(--orca-foreground); }
 .task.t-ok, .task.t-wait { color: var(--orca-muted-foreground); }
 .word { flex-shrink: 0; font-size: 11px; }
-.who { flex-shrink: 0; max-width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; }
+.who { flex-shrink: 1; min-width: 48px; max-width: 34%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; }
 .jump { flex-shrink: 0; color: var(--orca-muted-foreground); }
 .flag { flex: 0 0 12px; height: 16px; display: grid; place-items: center; }
 .chat { align-items: center; }

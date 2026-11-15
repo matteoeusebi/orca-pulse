@@ -21,7 +21,8 @@ const rows = (value: unknown, key: string): unknown[] => {
 }
 /** Objectives are free text, often long: one line, bounded. */
 export function shortTitle(value: string): string {
-  const line = (value.split('\n').find(part => part.trim()) ?? '').replace(/\s+/g, ' ').trim()
+  // Titles are often written as a Markdown heading.
+  const line = (value.split('\n').find(part => part.trim()) ?? '').replace(/^\s*#+\s*/, '').replace(/\s+/g, ' ').trim()
   return line.length > MAX_TITLE ? `${line.slice(0, MAX_TITLE - 1).trimEnd()}…` : line
 }
 /** Terminal titles carry a spinner frame or a status mark in front: it would change at every read. */

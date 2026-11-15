@@ -3,7 +3,7 @@
   "id": "pulse",
   "name": "Pulse",
   "description": "What is happening in the project you are looking at: orchestration progress, agent chats, scheduled automations and an optional written plan.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "engines": {
     "orca": ">=1.4.257"

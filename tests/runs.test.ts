@@ -55,6 +55,7 @@ test('a run without a live coordinator, without tasks, or finished long ago is n
   assert.ok(runView(runs[0], finished, [], terminals, now))
   assert.equal(runView(runs[0], finished, [], terminals, runs[0].createdAt + FINISHED_RUN_TTL_MS + 1), null)
   assert.equal(shortTitle('x'.repeat(300)).length, 120)
+  assert.equal(shortTitle('\n## Brief:  redo   the page\nmore'), 'Brief: redo the page')
   assert.deepEqual([parseRuns(null), parseTasks({ result: {} }), parseWorkers('no'), parseTerminals({ result: { terminals: [1] } })], [[], [], [], []])
 })
 
