@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "demo",
+  "title": "Zenit",
+  "status": "proposed",
+  "phases": [{ "id": "demo", "title": "Dimostrazione", "steps": [
+    { "id": "prepare", "title": "Preparare la prova", "doneWhen": { "manual": false } }
+  ] }]
+}

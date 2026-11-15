@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "release",
+  "title": "Release evidence",
+  "status": "approved",
+  "phases": [{
+    "id": "delivery",
+    "title": "Delivery",
+    "steps": [
+      { "id": "report", "title": "Report exists", "doneWhen": { "file": "docs/report.md" }, "work": { "branch": "release/*" } },
+      { "id": "tag", "title": "Release tagged", "doneWhen": { "gitTag": "v1.2.0" }, "work": { "branch": "main" } }
+    ]
+  }]
+}

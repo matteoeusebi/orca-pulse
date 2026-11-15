@@ -1,0 +1,5 @@
+{
+  "extends": "./.orca/types/tsconfig.json",
+  "compilerOptions": { "resolveJsonModule": true, "allowSyntheticDefaultImports": true, "allowJs": true },
+  "include": ["src", "tests", "locales"]
+}

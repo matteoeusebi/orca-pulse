@@ -1,0 +1,4 @@
+node_modules/
+.orca/
+.work/
+.DS_Store

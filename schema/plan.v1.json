@@ -1,0 +1,146 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:orca-plans:plan:v1",
+  "title": "Orca Plans v1",
+  "description": "One plan per plans/<id>.plan.json in the project main checkout. Unknown fields are ignored.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "title",
+    "status",
+    "phases"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "#/definitions/id"
+    },
+    "title": {
+      "$ref": "#/definitions/title"
+    },
+    "status": {
+      "enum": [
+        "proposed",
+        "approved",
+        "done",
+        "dropped"
+      ]
+    },
+    "approvedOn": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "phases": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/phase"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "definitions": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000,
+      "pattern": "\\S"
+    },
+    "phase": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "steps"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/id"
+        },
+        "title": {
+          "$ref": "#/definitions/title"
+        },
+        "size": {
+          "enum": [
+            "s",
+            "m",
+            "l"
+          ],
+          "description": "Phase weight: s = 1, m = 3, l = 8. If any phase has a size, unsized phases default to m. If no phase has a size, every step counts equally. Empty phases have no weight. Displayed percentages are floored; 100 requires every step to be done."
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/step"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "step": {
+      "type": "object",
+      "required": [
+        "id",
+        "title"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/id"
+        },
+        "title": {
+          "$ref": "#/definitions/title"
+        },
+        "doneWhen": {
+          "description": "Any JSON value is accepted for forward compatibility. Supported rules: {file: relativePath}, {gitTag: tagName}, {manual: boolean}, {approval: YYYY-MM-DD}. Git tags are read from safe loose or packed refs in the main repository. Empty string or null approval means waiting. Missing, unrecognised, conflicting or malformed rules remain to verify and never count as done.",
+          "examples": [
+            {
+              "file": "docs/report.md"
+            },
+            {
+              "manual": false
+            },
+            {
+              "approval": "2026-11-12"
+            },
+            {
+              "approval": ""
+            },
+            {
+              "gitTag": "v1.0.0"
+            }
+          ]
+        },
+        "work": {
+          "type": "object",
+          "required": [
+            "branch"
+          ],
+          "properties": {
+            "branch": {
+              "type": "string",
+              "maxLength": 1000,
+              "pattern": "^[^*\\s\\u0000-\\u001f\\u007f]+\\*?$",
+              "description": "Exact workspace branch, or a nonempty prefix ending in *. Activity must belong to this project; it never completes the step.",
+              "examples": [
+                "main",
+                "release/*"
+              ]
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

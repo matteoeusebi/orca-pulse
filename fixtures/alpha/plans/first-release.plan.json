@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "first-release",
+  "title": "Alba",
+  "status": "approved",
+  "approvedOn": "2026-11-12",
+  "phases": [
+    { "id": "research", "title": "Ricerca", "size": "s", "steps": [
+      { "id": "criteria", "title": "Criteri concordati", "doneWhen": { "manual": true } },
+      { "id": "report", "title": "Rapporto disponibile", "doneWhen": { "file": "docs/report.md" } }
+    ] },
+    { "id": "engine", "title": "Motore", "size": "m", "steps": [
+      { "id": "build", "title": "Prima prova completata", "doneWhen": { "manual": true } },
+      { "id": "review", "title": "Conferma la dimostrazione", "doneWhen": { "approval": "" } },
+      { "id": "release", "title": "Versione pubblicata", "doneWhen": { "gitTag": "v1.0.0" } }
+    ] }
+  ]
+}

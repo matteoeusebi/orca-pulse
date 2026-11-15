@@ -1,0 +1,41 @@
+{
+  "manifestVersion": 2,
+  "id": "pulse",
+  "name": "Pulse",
+  "description": "What is happening in the project you are looking at: orchestration progress, agent chats, scheduled automations and an optional written plan.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "engines": {
+    "orca": ">=1.4.257"
+  },
+  "execution": "trusted-worker",
+  "pluginApi": 1,
+  "main": "src/worker.ts",
+  "capabilities": [
+    {
+      "kind": "workspace:read"
+    },
+    {
+      "kind": "agent:read"
+    }
+  ],
+  "contributes": {
+    "panels": [
+      {
+        "id": "pulse",
+        "title": "Pulse",
+        "icon": "activity",
+        "entry": "src/panel.ts",
+        "ui": "html"
+      }
+    ],
+    "events": [
+      {
+        "on": "agent.status.changed"
+      },
+      {
+        "on": "workspace.removed"
+      }
+    ]
+  }
+}
